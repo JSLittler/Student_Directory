@@ -1,5 +1,5 @@
 @students = []
-filename = "students.csv"
+filename = "student.csv"
 
 def print_menu
   puts "1. Input the students"
@@ -42,6 +42,7 @@ def input_students
     puts "Now we have #{@students.count} students"
     name = STDIN.gets.chomp
   end
+  puts "Your students have been added. Please 'save' to keep a permanent record."
 end
 
 def print_header
