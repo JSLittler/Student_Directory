@@ -5,7 +5,7 @@ def input_students
   puts "To finish, just hit return twice"
   name = gets.chomp
   while !name.empty? do
-    @students << {ID: @students.length + 1, name: name, cohort: :november}
+    @students << {id: @students.length + 1, name: name, cohort: :november}
     puts "Now we have #{@students.count} students"
     name = gets.chomp
   end
@@ -20,13 +20,14 @@ end
 def print_student_list
   n = 1
   @students.each_with_index do |student|
-    puts "#{student[:ID]}. #{student[:name]} (#{student[:cohort]} cohort).".ljust(100)
+    puts "#{student[:id]}. #{student[:name]} (#{student[:cohort]} cohort).".ljust(100)
     n += 1
   end
 end
 
 def print_footer
-  puts "Overall, we have #{@students.count} great students".ljust(100)
+  puts "_____________".center(100)
+  puts "Overall, we have #{@students.count} great students".center(100)
 end
 
 def print_menu
@@ -46,19 +47,19 @@ end
 def save_students
   file = File.open("students.csv", "w")
   @students.each do |student|
-    student_data = [ID[:@students.length + 1], @student[:name], @student[:cohort]]
+    student_data = [student[:id], student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
   file.close
-  puts "Student details have been saved"
+  puts "Student details have been saved."
 end
 
 def load_students
   file = File.open("students.csv", "r")
   file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-    @students << {ID: @students.length + 1, name: name, cohort: cohort.to_sym}
+  id, name, cohort = line.chomp.split(',')
+    @students << {id: id, name: name, cohort: cohort.to_sym}
   end
   file.close
   puts "Previously saved student details have now been added"
