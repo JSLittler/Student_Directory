@@ -1,5 +1,4 @@
 @students = []
-filename = "student.csv"
 
 def print_menu
   puts "1. Input the students"
@@ -80,6 +79,10 @@ def save_students
   puts "Student details have been saved."
 end
 
+def load_successful
+  puts "Loaded #{@students.count} records from students.csv"
+end
+
 def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
@@ -87,15 +90,14 @@ def load_students(filename = "students.csv")
     @students << {id: id, name: name, cohort: cohort.to_sym}
   end
   file.close
-  puts "Previously saved student details have now been added"
+  load_successful
 end
 
 def try_load_students
-  filename = ARGV.first
+  filename = 'students.csv'
   return if filename.nil?
   if File.exists?(filename)
     load_students(filename)
-     puts "Loaded #{@students.count} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist."
     exit
